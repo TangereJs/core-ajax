@@ -7,5 +7,6 @@
   "dependencies": {
     "polymer": "Polymer/polymer#master",
     "promise-polyfill": "polymerlabs/promise-polyfill#master"
-  }
+  },
+  "version": "0.0.1.2"
 }
