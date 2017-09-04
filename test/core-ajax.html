@@ -15,7 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script src="../../web-component-tester/browser.js"></script>
   <script src="../../test-fixture/test-fixture-mocha.js"></script>
 
-  <link rel="import" href="../../polymer/polymer.html">
+  <link rel="import" href="../../tangere/tangere.html" />
   <link rel="import" href="../../test-fixture/test-fixture.html">
   <link rel="import" href="../core-ajax.html">
 </head>
@@ -132,6 +132,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       suite('when `auto` is enabled', function () {
         setup(function () {
           ajax = fixture('AutoGet');
+          ajax._boundHandleResponse = ajax.handleResponse.bind(ajax);
+          ajax._boundHandleError = ajax.handleError.bind(ajax);
+          ajax._boundDiscardRequest = ajax.discardRequest.bind(ajax);
         });
 
         test('automatically generates new requests', function (done) {
@@ -139,7 +142,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             done();
           });
 
-          ajax.handleas = 'text';
+          ajax.handleAs = 'text';
         });
 
         test('deduplicates multiple changes to a single request', function (done) {
@@ -149,6 +152,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           ajax.addEventListener('response', function () {
             try {
+              console.log('I happen third.')
               expect(ajax.activeRequests.length).to.be.eql(1);
               done();
             } catch (e) {
@@ -156,7 +160,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
           });
 
-          ajax.handleas = 'text';
+          ajax.handleAs = 'text';
           ajax.params = { foo: 'bar' };
           ajax.headers = { 'X-Foo': 'Bar' };
         });
@@ -164,6 +168,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       suite('the last response', function () {
         setup(function () {
+          ajax = fixture('AutoGet')
+          
+          ajax._boundHandleResponse = ajax.handleResponse.bind(ajax);
+          ajax._boundHandleError = ajax.handleError.bind(ajax);
+          ajax._boundDiscardRequest = ajax.discardRequest.bind(ajax);
+
           request = ajax.generateRequest();
           server.respond();
         });
@@ -218,6 +228,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var responseHandler;
 
         setup(function () {
+          ajax = fixture('AutoGet')
+          
+          ajax._boundHandleResponse = ajax.handleResponse.bind(ajax);
+          ajax._boundHandleError = ajax.handleError.bind(ajax);
+          ajax._boundDiscardRequest = ajax.discardRequest.bind(ajax);
+
           responseHandler = sinon.spy();
           ajax.addEventListener('response', responseHandler);
         });
@@ -237,6 +253,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       suite('when the response type is `json`', function () {
         setup(function () {
+          ajax = fixture('AutoGet')
+          
+          ajax._boundHandleResponse = ajax.handleResponse.bind(ajax);
+          ajax._boundHandleError = ajax.handleError.bind(ajax);
+          ajax._boundDiscardRequest = ajax.discardRequest.bind(ajax);
+
           server.restore();
         });
 

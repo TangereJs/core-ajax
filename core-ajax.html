@@ -33,7 +33,7 @@ element.
 @homepage github.io
 -->
 
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../tangere/tangere.html" />
 <link rel="import" href="core-request.html">
 <script>
   Polymer({
@@ -305,10 +305,9 @@ element.
       }
     },
 
-    observers: {
-      'url method headers contentType body sync handleAs withCredentials':
-        'requestOptionsChanged'
-    },
+    observers: [
+      'requestOptionsChanged(url, method, headers, contentType, body, sync, handleAs, withCredentials)'
+    ],
 
     configure: function() {
       return {
@@ -371,6 +370,11 @@ element.
 
     requestOptionsChanged: function() {
       if (this.auto) {
+        // uncomment to enable request deduplication when auto is set
+        // if (this.lastRequest) {
+        //   this.lastRequest.abort();
+        //   this.activeRequests = this.activeRequests.splice(this.activeRequests.length-1,1);
+        // }
         this.generateRequest();
       }
     },
