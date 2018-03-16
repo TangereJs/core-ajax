@@ -1,0 +1,50 @@
+<link rel="import" href="../../tangere/tangere.html" />
+<link rel="import" href="../core-ajax.html">
+<link rel="import" href="../../iron-image/iron-image.html">
+<link rel="import" href="../../iron-flex-layout/iron-flex-layout-classes.html" />
+
+<dom-module id="video-feed-element">
+  <template>
+    <style is="custom-style" include="iron-flex"></style>
+    <style is="custom-style" include="iron-flex-factors">
+       :host {
+        display: block;
+        box-sizing: border-box;
+      }
+
+      iron-image {
+        background-color: lightgray;
+        margin: 1em;
+      }
+
+    </style>
+
+    <core-ajax auto url="//www.googleapis.com/youtube/v3/videos/" params='{"alt":"json", "part":"polymer"}' handle-as="json" last-response="{{ajaxResponse}}"></core-ajax>
+    <h1>Video Feed</h1>
+    <section class="flex layout horizontal wrap">
+      <template is="dom-repeat" items="[[ajaxResponse.feed.entry]]">
+        <a href="[[item.link[0].href]]" target="_blank">
+          <iron-image src="[[item.media$group.media$thumbnail[0].url]]" width="256" height="256" sizing="cover" preload fade></iron-image>
+        </a>
+      </template>
+    </section>
+
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "video-feed-element",
+    properties: {
+      ajaxResponse: {
+        type: Object,
+        value: function() {
+          return {};
+        }
+      }
+    },
+    ready: function() {
+
+    }
+  });
+
+</script>
