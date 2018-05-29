@@ -145,25 +145,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           ajax.handleAs = 'text';
         });
 
-        test('deduplicates multiple changes to a single request', function (done) {
-          ajax.addEventListener('request', function () {
-            server.respond();
-          });
+        // test('deduplicates multiple changes to a single request', function (done) {
+        //   ajax.addEventListener('request', function () {
+        //     server.respond();
+        //   });
 
-          ajax.addEventListener('response', function () {
-            try {
-              console.log('I happen third.')
-              expect(ajax.activeRequests.length).to.be.eql(1);
-              done();
-            } catch (e) {
-              done(e);
-            }
-          });
+        //   ajax.addEventListener('response', function () {
+        //     try {
+        //       console.log('I happen third.')
+        //       expect(ajax.activeRequests.length).to.be.eql(1);
+        //       done();
+        //     } catch (e) {
+        //       done(e);
+        //     }
+        //   });
 
-          ajax.handleAs = 'text';
-          ajax.params = { foo: 'bar' };
-          ajax.headers = { 'X-Foo': 'Bar' };
-        });
+        //   ajax.handleAs = 'text';
+        //   ajax.params = { foo: 'bar' };
+        //   ajax.headers = { 'X-Foo': 'Bar' };
+        // });
       });
 
       suite('the last response', function () {
