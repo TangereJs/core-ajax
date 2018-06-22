@@ -41,7 +41,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         notify: true,
         readOnly: true,
         value: function() {
-          this._setXhr(new XMLHttpRequest());
+          return new XMLHttpRequest();
         }
       },
 
@@ -58,7 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         notify: true,
         readOnly: true,
         value: function() {
-          this._setResponse(null);
+          return null;
         }
       },
 
@@ -80,7 +80,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.rejectCompletes = reject;
           }.bind(this));
 
-          this._setCompletes(completes);
+          return completes;
         }
       },
 
@@ -97,7 +97,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         notify: true,
         readOnly: true,
         value: function() {
-          this._setProgress({});
+          return {};
         }
       },
 
@@ -112,9 +112,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         type: Boolean,
         notify: true,
         readOnly: true,
-        value: function() {
-          this._setAborted(false);
-        }
+        value: false
       }
     },
 
