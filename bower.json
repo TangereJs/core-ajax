@@ -5,7 +5,7 @@
     "core-ajax.html"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#master",
+    "tangere": "TangereJs/tangere#master",
     "promise-polyfill": "polymerlabs/promise-polyfill#master"
   },
   "version": "0.0.1.2"
